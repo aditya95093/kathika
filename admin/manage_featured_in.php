@@ -1,31 +1,23 @@
 <?php
 
-include('includes/config.php');
-
-
+include ('includes/config.php');
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $sql = "DELETE FROM glimpses_card WHERE id=?";
+    $sql = "DELETE  FROM featured_in WHERE id=?";
     $stmt = $dbh->prepare($sql);
     $stmt->execute([$id]);
-
-    $message = "Record deleted successfully";
+    $message = "Record Delete successfully";
 }
 
-$sql = "SELECT hc.id, hc.heading, hci.image 
-        FROM glimpses_card hc
-        JOIN images_glimpses_card hci ON hc.id = hci.content_id";
-
+$sql = "SELECT * FROM featured_in";
 $stmt = $dbh->query($sql);
 $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
-<!DOCTYPE html>
-<html>
-
 <head>
-    <title> Content Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Team</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         table {
@@ -125,36 +117,38 @@ $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <form method="post" enctype="multipart/form-data">
-    <a href="dashboard.php" class="btn btn-primary">Back to Dashboard</a>
-        <h2>Content List</h2>
-        <table>
-            <thead>
+        <a href="dashboard.php" class="btn btn-primary">Back to Dashboard</a>
+        <h2>Our Team Table</h2>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Link</th>
+                <th>Action</th>
+            </tr>
+            <?php foreach ($records as $record): ?>
                 <tr>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Heading</th>
-                    <th>Action</th>
+                    <td>
+                        <?php echo $record['id']; ?>
+                    </td>
+                    <td>
+                        <img src="<?php echo $record['image']; ?>" alt="image" width="100px" style="max-width: 100px;">
+                    </td>
+                    <td>
+                        <?php echo $record['link']; ?>
+                    </td>
+                   
+
+                    <td>
+                        <a href="edit_featured_in.php?id=<?php echo $record['id']; ?>" class="edit-btn">Edit</a>
+                        <a href="?delete=<?php echo $record['id']; ?>"
+                            onclick="return confirm('Are you sure you want to delete this record?')"
+                            class="delete-btn">Delete</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($records as $record): ?>
-                    <tr>
-                        <td data-label="ID"><?php echo $record['id']; ?></td>
-                        <td data-label="Image">
-                            <img src="<?php echo $record['image']; ?>" alt="Image" width="100px" style="max-width: 100px;">
-                        </td>
-                        <td data-label="Heading"><?php echo $record['heading']; ?></td>
-                        <td data-label="Action">
-                            <a href="edit_glimpses_card.php?id=<?php echo $record['id']; ?>" class="edit-btn">Edit</a>
-                            <a href="?delete=<?php echo $record['id']; ?>"
-                                onclick="return confirm('Are you sure you want to delete this record?')"
-                                class="delete-btn">Delete</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
+            <?php endforeach; ?>
         </table>
-        
+
     </form>
 </body>
 

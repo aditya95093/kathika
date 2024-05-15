@@ -1,5 +1,5 @@
 <div class="brand clearfix">
-	<a href="dashboard.php" style="font-size: 20px; padding-top:1%; color:#fff">Kathika </a>
+	<a href="dashboard.php" style="font-size: 37px; padding-top:1%; color:#fff">Kathika </a>
 	<span class="menu-btn"><i class="fa fa-bars"></i></span>
 	<ul class="ts-profile-nav">
 		<li class="ts-account">

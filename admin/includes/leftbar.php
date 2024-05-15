@@ -8,6 +8,8 @@
 				<li><a href="hero_content.php">Add Hero Section</a></li>
 				<li><a href="heart.php">Add Heart</a></li>
 				<li><a href="card.php">Add Card</a></li>
+				<li><a href="featured_in.php">Add Featured In</a></li>
+				<li><a href="manage_featured_in.php"> Featured In</a></li>
 			</ul>
 		</li>
 
@@ -51,7 +53,13 @@
 				<li><a href="manage_kathika_event.php">Kathika Event</a></li>
 			</ul>
 		</li>
-		<li><a href="#">Our Team</a></li>
+		<li><a href="#">Our Team</a>
+			<ul>
+				<li><a href="our_team.php">Add Our Team</a></li>
+				<li><a href="manage_our_team.php">Our Team</a></li>
+			</ul>
+		</li>
+
 		<li><a href="#">Kathika Trust</a>
 			<ul>
 				<li><a href="other_project.php">Add Our Other Proect</a></li>

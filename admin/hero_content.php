@@ -62,7 +62,7 @@ if (isset($_POST['add'])) {
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: lightgray;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,7 +71,7 @@ if (isset($_POST['add'])) {
 
         .container {
             max-width: 600px;
-            background-color: #fff;
+            background-color: aliceblue;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

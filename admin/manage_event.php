@@ -125,6 +125,7 @@ $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <form method="post" enctype="multipart/form-data">
+    <a href="dashboard.php" class="btn btn-primary">Back to Dashboard</a>
         <h2>Event List</h2>
         <table>
             <thead>
@@ -153,7 +154,7 @@ $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="dashboard.php" class="btn btn-primary">Back to Dashboard</a>
+       
     </form>
 </body>
 
