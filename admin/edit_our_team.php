@@ -8,7 +8,7 @@ if (isset($_POST['edit'])) {
     $imageurl = $_POST['image'];
     $post = $_POST['post'];
 
-    $sql = "UPDATE our_team SET name=?, image=?, post=?,  WHERE id=?";
+    $sql = "UPDATE our_team SET name=?, image=?, post=? WHERE id=?";
     $stmt = $dbh->prepare($sql);
     $stmt->execute([$name, $imageurl, $post,  $id]);
 
@@ -20,7 +20,7 @@ if (isset($_POST['edit'])) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "SELECT * FROM our_team WHERE id=?";
+    $sql = "SELECT * FROM our_team WHERE id = ?";
     $stmt = $dbh->prepare($sql);
     $stmt->execute([$id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,6 +31,7 @@ if (isset($_GET['id'])) {
 
     $name = $result['name'];
     $imageurl = $result['image'];
+    $post = $result['post'];
 } else {
     exit("Invalid request");
 }

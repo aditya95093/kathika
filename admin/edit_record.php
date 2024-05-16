@@ -12,7 +12,7 @@ try {
     exit("Error: " . $e->getMessage());
 }
 
-$message = ''; 
+$message = '';
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
@@ -20,30 +20,29 @@ if (isset($_POST['update'])) {
     $description = $_POST['description'];
     $category = $_POST['category'];
 
-    
+    // Check if a new image is uploaded
     if ($_FILES['image']['size'] > 0) {
         $imageFileName = $_FILES['image']['name'];
         $imageTmpName = $_FILES['image']['tmp_name'];
         $newFilePath = "uploads/" . $imageFileName;
 
-       
+        // Move the uploaded image to the uploads directory
         if (move_uploaded_file($imageTmpName, $newFilePath)) {
-           
-            $sql = "UPDATE hero_content SET image=?, heading=?, description=?, category=? WHERE id=?";
-            $stmt = $dbh->prepare($sql);
-            $stmt->execute([$newFilePath, $heading, $description, $category, $id]);
+            // Update the hero_content table with the new image path
+            $sql_update = "UPDATE hero_content SET heading=?, description=?, category=? WHERE id=?";
+            $stmt_update = $dbh->prepare($sql_update);
+            $stmt_update->execute([$heading, $description, $category, $id]);
         } else {
-            
             $message = "File upload failed.";
         }
     } else {
-        
-        $sql = "UPDATE hero_content SET heading=?, description=?, category=? WHERE id=?";
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute([$heading, $description, $category, $id]);
+        // If no new image is uploaded, update other fields except for the image path
+        $sql_update = "UPDATE hero_content SET heading=?, description=?, category=? WHERE id=?";
+        $stmt_update = $dbh->prepare($sql_update);
+        $stmt_update->execute([$heading, $description, $category, $id]);
     }
 
-    
+    // Redirect to manage_home.php after updating
     header("Location: manage_home.php");
     exit();
 }

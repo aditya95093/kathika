@@ -1,15 +1,15 @@
 <?php
 
-include('includes/config.php');
+include ('includes/config.php');
 
 if (isset($_POST['edit'])) {
     $id = $_POST['id'];
-    $heading = $_POST['heading'];
     $imageurl = $_POST['image'];
+    $link = $_POST['link'];
 
-    $sql = "UPDATE featured_in SET image=?, link=?,  WHERE id=?";
+    $sql = "UPDATE featured_in SET image=?, link=? WHERE id=?";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute([$imageurl, $link,  $id]);
+    $stmt->execute([$imageurl, $link, $id]);
 
     $message = "Record updated successfully";
     header('location:manage_featured_in.php');
@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
     }
 
     $imageurl = $result['image'];
-    $link= $result['link'];
+    $link = $result['link'];
 } else {
     exit("Invalid request");
 }
@@ -159,7 +159,7 @@ if (isset($_GET['id'])) {
             <label>Image:</label>
             <input type="text" name="image" value="<?php echo $imageurl; ?>" required><br><br>
             <label>Link:</label>
-            <input type="text" name="link" value="<?php echo $heading; ?>" required><br><br>
+            <input type="text" name="link" value="<?php echo $link; ?>" required><br><br>
             <input type="submit" name="edit" value="Save Changes">
             <a href="manage_featured_in.php" class="btn btn-secondary">Cancel</a>
         </form>
